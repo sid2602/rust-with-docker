@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  api_server:
+    build: ./
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/usr/src/app
+    command: bash -c "cargo run"
+
+  db:
+    image: "postgres:9"
+    ports:
+      - "5432:5432"
+    volumes:
+      - .:/var/lib/postgresql/data/pgdata
+    environment:
+      POSTGRES_PASSWORD: supersecretpassword
+      PGDATA: /var/lib/postgresql/data/pgdata
